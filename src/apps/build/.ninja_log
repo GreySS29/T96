@@ -1,0 +1,6 @@
+# ninja log v7
+0	30	1791121414045724276	CMakeFiles/tank.dir/home/greys/Documents/Doc/C+/my_progect/T96/src/hardware/ymotor.cpp.o	12b103488a83e0e6
+1	205	1791121564820324231	CMakeFiles/tank.dir/home/greys/Documents/Doc/C+/my_progect/T96/src/hardware/ymotor.cpp.o	12b103488a83e0e6
+1	214	1791121643843866698	CMakeFiles/tank.dir/home/greys/Documents/Doc/C+/my_progect/T96/src/drivers/motorDriver_25mm.cpp.o	f3bd9b4bf5819d88
+0	606	1791121665242624823	CMakeFiles/tank.dir/main.cpp.o	dfbca91874040bfe
+606	638	1791121665849643585	tank	f3ee0258e1c9edaa
