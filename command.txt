@@ -1,1 +1,6 @@
 ps aux | grep -E 'ultrasonic|a\.out|gpiomon|gpioset'
+
+
+
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build

@@ -15,8 +15,8 @@ pkg_check_modules(GPIOD REQUIRED IMPORTED_TARGET libgpiod)
 
 add_executable(tank
     main.cpp
-    ../hardware/ymotor.cpp
-    ../drivers/motorDriver_25mm.cpp
+    ../src/hardware/ymotor.cpp
+    ../src/drivers/motorDriver_25mm.cpp
 )
 
 target_include_directories(tank

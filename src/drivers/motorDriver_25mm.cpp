@@ -71,14 +71,11 @@ MotorDriver_25mm::MotorDriver_25mm(int pin1 , int pin2){
         throw std::invalid_argument("Invalid motor state");
     }
 
-    if (gpiod_line_request_set_value(request_, 0, value0) < 0) {
-        throw std::runtime_error("Failed to set motor pin 0");
-    }
+    enum gpiod_line_value values[2] = {value0, value1};
 
-    if (gpiod_line_request_set_value(request_, 1, value1) < 0) {
-        throw std::runtime_error("Failed to set motor pin 1");
+    if (gpiod_line_request_set_values(request_, values) < 0) {
+        throw std::runtime_error("Failed to set motor pins");
     }
-
     state_ = new_state;
 }
 
