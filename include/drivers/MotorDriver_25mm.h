@@ -1,15 +1,23 @@
 #pragma once
 
-#include "../hardware/Ymotor.h"
+#include "../hardware/IMotor.h"
+#include <gpiod.hpp>
+#include <string>
 
+class MotorDriver_25mm final : public IMotor
+{
+public:
+    MotorDriver_25mm(gpiod::line::offset pin1,
+                     gpiod::line::offset pin2,
+                     const std::string& chip_path = "/dev/gpiochip0");
+    ~MotorDriver_25mm() override;
 
-class MotorDriver_25mm final : public Ymotor{
-    
-    public:
-    MotorDriver_25mm(int pin1, int pin2);
-    ~MotorDriver_25mm() override =default;
+    void       set_state(MotorState new_state) override;
+    MotorState get_state() const noexcept override { return state_; };
 
-    //set
-    void set_state(MotorState new_state) override;
-
+private:
+    gpiod::line::offsets pins_;      //vector
+    gpiod::chip          chip_;      
+    gpiod::line_request  request_;
+    MotorState           state_ = MotorState::Inactive;
 };

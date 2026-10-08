@@ -5,17 +5,18 @@ project(Tank
     LANGUAGES CXX
 )
 
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(PkgConfig REQUIRED)
+pkg_check_modules(GPIODCXX REQUIRED IMPORTED_TARGET libgpiodcxx)
 
-pkg_check_modules(GPIOD REQUIRED IMPORTED_TARGET libgpiod)
+add_compile_options(-fdiagnostics-color=always)
 
 add_executable(tank
     main.cpp
-    ../src/hardware/ymotor.cpp
     ../src/drivers/motorDriver_25mm.cpp
 )
 
@@ -24,16 +25,9 @@ target_include_directories(tank
         ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(tank
-    PRIVATE
-        PkgConfig::GPIOD
-)
+target_link_libraries(tank PRIVATE PkgConfig::GPIODCXX)
 
 target_compile_options(tank
     PRIVATE
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wconversion
-        -Wshadow
+        -Wall -Wextra -Wpedantic -Wconversion -Wshadow
 )
