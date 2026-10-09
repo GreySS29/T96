@@ -14,9 +14,8 @@ int main()
        tank.stop();
        while (true)
        {
-        tank.get_ultra_distant();
+        tank.active_safety();
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        // tank.active_safety();
        }
        tank.stop();
 
