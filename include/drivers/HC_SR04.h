@@ -47,6 +47,7 @@ class HC_SR04 final : public ISensor
         }
 
         std::optional<double> read_distance_cm() override;
+       bool check_min_distant_cm(double min_distant) override;
 
         SensorState get_state() const noexcept override { return state_; }
 

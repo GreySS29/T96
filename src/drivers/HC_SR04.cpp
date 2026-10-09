@@ -50,3 +50,11 @@ std::optional<double> HC_SR04::read_distance_cm()
     state_ = SensorState::Ready;
     return d;
 }
+
+
+bool HC_SR04::check_min_distant_cm(double min_distant) 
+{
+    const auto d = read_distance_cm();
+    if (d<= min_distant) return true;
+    else return false;
+}

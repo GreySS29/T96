@@ -9,6 +9,7 @@ class ISensor
     public:
     virtual ~ISensor() = default;
     virtual std::optional<double> read_distance_cm() = 0;
+    virtual bool check_min_distant_cm(double) = 0;
     virtual SensorState get_state() const noexcept =0;
     
     

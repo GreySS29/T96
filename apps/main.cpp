@@ -8,8 +8,13 @@
 //std::this_thread::sleep_for(std::chrono::seconds(1));
 int main()
 {
+    
     try {
        Tank tank;
+       while (true)
+       {
+        tank.active_safety();
+       }
        
    } catch (const std::exception& e) {
        std::cerr << "error: " << e.what() << '\n';
