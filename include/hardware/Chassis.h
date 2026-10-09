@@ -1,14 +1,14 @@
 #pragma once 
-#include "Ymotor.h"
+#include "IMotor.h"
 #include <memory>
 
 class Chassis {
     private:
-    std::unique_ptr<Ymotor> leftMot_;
-    std::unique_ptr<Ymotor> rightMot_;
+    std::unique_ptr<IMotor> leftMot_;
+    std::unique_ptr<IMotor> rightMot_;
 
     public:
-        Chassis(std::unique_ptr<Ymotor> left, std::unique_ptr <Ymotor> right) : 
+        Chassis(std::unique_ptr<IMotor> left, std::unique_ptr <IMotor> right) : 
             leftMot_(std::move(left)) , rightMot_(std::move(right))
     {}
         void forward () {

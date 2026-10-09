@@ -17,7 +17,7 @@ MotorDriver_25mm::MotorDriver_25mm(gpiod::line::offset pin1,
     if (pin1 == pin2) {
         throw std::invalid_argument("Motor pins must be different");
     }
-    // линии уже в INACTIVE, state_ = Inactive по умолчанию
+    
 }
 
 MotorDriver_25mm::~MotorDriver_25mm()
