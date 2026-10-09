@@ -27,6 +27,8 @@ public:
 
     void active_safety(){safety_->active();};
     void stop(){base_->stop();};
+    void get_ultra_distant(){
+        std::cout<<ultraSonicFront_->read_distance_cm()<<'\n';}
    
 };
 
