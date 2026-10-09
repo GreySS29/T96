@@ -26,6 +26,7 @@ public:
     : base_(std::move(base)), ultraSonicFront_(std::move(front)) {}
 
     void active_safety(){safety_->active();};
+    void stop(){base_->stop();};
    
 };
 

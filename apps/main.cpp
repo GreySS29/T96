@@ -15,6 +15,10 @@ int main()
        {
         tank.active_safety();
        }
+       tank.stop();
+
+
+       
        
    } catch (const std::exception& e) {
        std::cerr << "error: " << e.what() << '\n';

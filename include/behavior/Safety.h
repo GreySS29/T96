@@ -17,7 +17,7 @@ public:
         //     base_->forward(2);
         //     base_->turn_right_full(1);
         // }
-        if(ultraSonicFront_->check_min_distant_cm(20.)) base_->back(1);
+        if(ultraSonicFront_->check_min_distant_cm(0.02)) base_->back(1);
         // if(ultraSonicBack_->check_min_distant_cm(20.)) base_->forward(1);
     }
 
