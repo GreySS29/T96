@@ -57,4 +57,5 @@ bool HC_SR04::check_min_distant_cm(double min_distant)
     const auto d = read_distance_cm();
     if (!d) return false;     
     else if (*d <= min_distant) return true;
+    else return false;
 }
