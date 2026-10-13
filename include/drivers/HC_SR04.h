@@ -51,5 +51,10 @@ class HC_SR04 final : public ISensor
 
         SensorState get_state() const noexcept override { return state_; }
 
+        bool is_object_detected() override
+        {
+            return check_min_distant_cm(20); // kDefaultObstacleDistanceCm 
+        }
+
 
 };

@@ -3,6 +3,7 @@
 #include "behavior/Safety.h"
 #include "drivers/MotorDriver_25mm.h"
 #include "drivers/HC_SR04.h"
+#include "drivers/Ir_sensor.h"
 #include <utility>
 
 class Tank
@@ -10,6 +11,8 @@ class Tank
 private:
     std::unique_ptr<Chassis> base_;
     std::unique_ptr<ISensor> ultraSonicFront_;
+    std::unique_ptr<ISensor> ir_sensorRight_;
+    std::unique_ptr<ISensor> ir_sensorLeft_;
     std::unique_ptr<Safety> safety_;
 
 public:
@@ -19,7 +22,9 @@ public:
             std::make_unique<MotorDriver_25mm>(23,24))
             ) ,
     ultraSonicFront_ (std::make_unique<HC_SR04>(5,6)),
-    safety_(std::make_unique<Safety>(base_,ultraSonicFront_))
+    ir_sensorRight_(std::make_unique<Ir_sensor>(22)),
+    ir_sensorLeft_(std::make_unique<Ir_sensor>(25)),
+    safety_(std::make_unique<Safety>(base_,ultraSonicFront_,ir_sensorRight_,ir_sensorLeft_))
     {}
 
     Tank(std::unique_ptr<Chassis> base, std::unique_ptr<ISensor> front)
