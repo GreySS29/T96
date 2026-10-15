@@ -1,5 +1,5 @@
 T96
-![base](doc/version%200.1/PSX_20261014_133745.jpg)
+
 
 **Topic:** Implementation of an Autonomous Robot Using a Makeblock Kit and Raspberry Pi 4 - v.0.1
 
@@ -63,3 +63,5 @@ The project is currently focused on improving obstacle bypassing. Instead of onl
 - Implement a state-machine-based control system
 - Add telemetry and logging features
 - Develop autonomous navigation using camera and LiDAR data
+
+![base](doc/version%200.1/PSX_20261014_133745.jpg)
