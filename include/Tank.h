@@ -30,7 +30,7 @@ public:
     Tank(std::unique_ptr<Chassis> base, std::unique_ptr<ISensor> front)
     : base_(std::move(base)), ultraSonicFront_(std::move(front)) {}
 
-    void active_safety(){safety_->active();};
+    void active_safety(){safety_->save_waiting();};
     void stop(){base_->stop();};
     void get_ultra_distant(){
         std::cout << ultraSonicFront_->read_distance_cm().value_or(-1.0) << '\n';}

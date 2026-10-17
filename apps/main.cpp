@@ -12,12 +12,8 @@ int main()
     try {
        Tank tank;
        tank.stop();
-       while (true)
-       {
-        tank.active_safety();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-       }
-       tank.stop();
+       
+       
 
 
        

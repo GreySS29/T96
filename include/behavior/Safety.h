@@ -2,6 +2,7 @@
 #include "../hardware/ISensor.h"
 #include <atomic>
 #include <thread>
+#include <chrono>
 
 class Safety
 {
@@ -11,16 +12,37 @@ private:
     //std::unique_ptr<ISensor>& ultraSonicBack_;
     std::unique_ptr<ISensor>& ir_sensorRight_;
     std::unique_ptr<ISensor>& ir_sensorLeft_;
-    std::atomic<bool> emergency_stop_{false};
     std::jthread watchdog_;
+
+    void obstacle_watchdog(std::stop_token stop_token){
+    while(!stop_token.stop_requested()) {
+        const bool obstacle =
+                ultraSonicFront_.check_min_distant_cm(15.0) ||
+                ir_sensorLeft_.is_object_detected() ||
+                ir_sensorRight_.is_object_detected();
+
+            if(obstacle) {
+                chassis_->set_emergency_stop(true);
+                break;
+            }
+        
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
     
 
 public:
-    Safety(std::unique_ptr<Chassis>& base,std::unique_ptr<ISensor>& ultraSonicFront,std::unique_ptr<ISensor>& ir_sensorRight,std::unique_ptr<ISensor>& ir_sensorLeft) :
-    chassis_(base), ultraSonicFront_(ultraSonicFront),  ir_sensorRight_(ir_sensorRight), ir_sensorLeft_(ir_sensorLeft){}
-    ~Safety() {
-        stop_watcdog();
-    }
+    Safety(std::unique_ptr<Chassis>& base,
+        std::unique_ptr<ISensor>& ultraSonicFront,
+        std::unique_ptr<ISensor>& ir_sensorRight,
+        std::unique_ptr<ISensor>& ir_sensorLeft) :
+        chassis_(base), 
+        ultraSonicFront_(ultraSonicFront),  
+        ir_sensorRight_(ir_sensorRight), 
+        ir_sensorLeft_(ir_sensorLeft), 
+        watchdog_([this](std::stop_token stop_token) {
+        obstacle_watchdog(stop_token);}) {}
+   
     Safety(const Safety&) = delete;
     Safety operator=(const Safety&) = delete;
 
@@ -38,17 +60,9 @@ public:
         // if(ultraSonicBack_->check_min_distant_cm(20.)) chassis_->forward(1);
     }
 
-    void obstacle_watchdog(std::stop_token stop_token){
-        while(!stop_token.stop_requested()) {
-            if (ultraSonicFront_->check_min_distant_cm(15.0) || ir_sensorLeft_->is_object_detected() 
-                || ir_sensorRight_->is_object_detected()){
-                    emergency_stop_.store(true);
-                    chassis_->stop();
-                    break; 
-                }
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        }
-    }
+   
+
+    
 
 
 
