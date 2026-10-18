@@ -1,8 +1,6 @@
 #include "iostream"
 #include "../hardware/Chassis.h"
-#include "Safety.h" 
-#include <atomic>
-#include <thread>
+#include "memory"
 
 
 
@@ -10,21 +8,21 @@ class KeyboardControl
 {
 private:
     char command_ =0;
-    Chassis& chassis_;
+    std::unique_ptr<Chassis>& chassis_;
 public:
-    KeyboardControl(Chassis* chassis, Safety* detector) :
+    KeyboardControl(std::unique_ptr<Chassis>& chassis) :
         chassis_(chassis){};
     void take_control(){
 
         while(command_!='x'){
             std::cin >> command_;
 
-            if (command_ == 'w') chassis_.forward();
-            else if (command_ == 's') chassis_.stop();
-            else if (command_ == 'a') chassis_.turn_left_full();
-            else if (command_ == 'd') chassis_.turn_right_full();
+            if (command_ == 'w') chassis_->forward();
+            else if (command_ == 's') chassis_->stop();
+            else if (command_ == 'a') chassis_->turn_left_full();
+            else if (command_ == 'd') chassis_->turn_right_full();
         }
-        chassis_.stop();
+        chassis_->stop();
     }
 };
 

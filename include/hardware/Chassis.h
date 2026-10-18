@@ -84,12 +84,12 @@ class Chassis {
         }
 
         void stop() {
-                std::scoped lock lock(mutex_);
+                std::scoped_lock lock(mutex_);
                 stop_imp();
         }
 
         void back() {
-                std::scoped lock lock(mutex_);
+                std::scoped_lock lock(mutex_);
                 //work anytime 
                 back_imp();
         }

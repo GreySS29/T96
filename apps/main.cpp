@@ -12,6 +12,14 @@ int main()
     try {
        Tank tank;
        tank.stop();
+       char kcontrol;
+       while (std::cin >> kcontrol)
+       {
+        if (kcontrol == 'k') tank.get_control_on_keyboard();
+       }
+       tank.stop();
+       
+       
        
        
 
