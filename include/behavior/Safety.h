@@ -51,8 +51,8 @@ public:
     
     void save(bool front, bool left, bool right) {
     if (front) chassis_->back(1);
-    if (left)  chassis_->turn_left_full(1);
-    if (right) chassis_->turn_right_full(1);
+    if (left)  chassis_->turn_right_full(1);
+    if (right) chassis_->turn_left_full(1);
     }
 };
 

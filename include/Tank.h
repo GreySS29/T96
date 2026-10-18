@@ -33,7 +33,6 @@ public:
     Tank(std::unique_ptr<Chassis> base, std::unique_ptr<ISensor> front)     //for test
     : base_(std::move(base)), ultraSonicFront_(std::move(front)) {}
 
-    void active_safety(){safety_->save_waiting();};
     void get_control_on_keyboard() {
         kControl_->take_control();
     }
