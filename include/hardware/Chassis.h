@@ -23,21 +23,21 @@ class Chassis {
 
         }
         void turn_left_full_imp () {
+                leftMot_->set_state(MotorState::ActiveBack);
+                rightMot_->set_state(MotorState::ActiveUp);
+        }
+
+         void turn_right_full_imp () {
                 leftMot_->set_state(MotorState::ActiveUp);
                 rightMot_->set_state(MotorState::ActiveBack);
         }
-
-        
 
         void stop_imp () {
                 leftMot_->set_state(MotorState::Inactive);
                 rightMot_->set_state(MotorState::Inactive);
         }
 
-        void turn_right_full_imp () {
-                leftMot_->set_state(MotorState::ActiveBack);
-                rightMot_->set_state(MotorState::ActiveUp);
-        }
+       
 
     public:
         Chassis(std::unique_ptr<IMotor> left, std::unique_ptr <IMotor> right) : 

@@ -3,6 +3,7 @@
 #include <atomic>
 #include <thread>
 #include <chrono>
+#include <iostream>
 
 class Safety
 {
@@ -24,6 +25,7 @@ private:
             if(obstacle) {
                 chassis_->set_emergency_stop(true);
                 std::cout << "obsctacle\n";
+                save_waiting();
                 break;
             }
             else chassis_->set_emergency_stop(false);
@@ -57,8 +59,8 @@ public:
         //     chassis_->turn_right_full(1);
         // }
         if(ultraSonicFront_->check_min_distant_cm(20.0)) chassis_->back(1);
-        if(ir_sensorLeft_->is_object_detected()) chassis_-> turn_left_full(1);
-        if(ir_sensorRight_->is_object_detected()) chassis_->turn_right_full(1);
+        if(ir_sensorLeft_->is_object_detected()) chassis_-> turn_right_full(1);
+        if(ir_sensorRight_->is_object_detected()) chassis_->turn_left_full(1);
         // if(ultraSonicBack_->check_min_distant_cm(20.)) chassis_->forward(1);
     }
 
