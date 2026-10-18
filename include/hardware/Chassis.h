@@ -109,8 +109,8 @@ class Chassis {
         }
 
         void turn_left_full (auto seconds) {
-                leftMot_->set_state(MotorState::ActiveUp);
-                rightMot_->set_state(MotorState::ActiveBack);
+                leftMot_->set_state(MotorState::ActiveBack);
+                rightMot_->set_state(MotorState::ActiveUp);
                 std::this_thread::sleep_for(std::chrono::seconds(seconds));
                 stop();
         }
@@ -118,20 +118,20 @@ class Chassis {
         
         
         void turn_right_full (auto seconds) {
-                leftMot_->set_state(MotorState::ActiveBack);
-                rightMot_->set_state(MotorState::ActiveUp);
+                leftMot_->set_state(MotorState::ActiveUp);
+                rightMot_->set_state(MotorState::ActiveBack);
                 std::this_thread::sleep_for(std::chrono::seconds(seconds));
                 stop();
         }
-        void turn_left_half () {
-                leftMot_->set_state(MotorState::ActiveUp);
-                rightMot_->set_state(MotorState::Inactive);
-        }
+        // void turn_left_half () {
+        //         leftMot_->set_state(MotorState::ActiveUp);
+        //         rightMot_->set_state(MotorState::Inactive);
+        // }
 
-        void turn_right_half () {
-                leftMot_->set_state(MotorState::Inactive);
-                rightMot_->set_state(MotorState::ActiveUp);
-        }
+        // void turn_right_half () {
+        //         leftMot_->set_state(MotorState::Inactive);
+        //         rightMot_->set_state(MotorState::ActiveUp);
+        // }
 
         
 

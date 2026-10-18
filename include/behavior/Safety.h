@@ -15,24 +15,22 @@ private:
     std::unique_ptr<ISensor>& ir_sensorLeft_;
     std::jthread watchdog_;
 
-    void obstacle_watchdog(std::stop_token stop_token){
-    while(!stop_token.stop_requested()) {
-        const bool obstacle =
-                ultraSonicFront_->check_min_distant_cm(15.0) ||
-                ir_sensorLeft_->is_object_detected() ||
-                ir_sensorRight_->is_object_detected();
+   void obstacle_watchdog(std::stop_token stop_token) {
+    while (!stop_token.stop_requested()) {
+        const bool front = ultraSonicFront_->check_min_distant_cm(20.0);
+        const bool left  = ir_sensorLeft_->is_object_detected();
+        const bool right = ir_sensorRight_->is_object_detected();
 
-            if(obstacle) {
-                chassis_->set_emergency_stop(true);
-                std::cout << "obsctacle\n";
-                save_waiting();
-                break;
-            }
-            else chassis_->set_emergency_stop(false);
-        
+        if (front || left || right) {
+            chassis_->set_emergency_stop(true);
+            std::cout << "obstacle\n";
+            save(front, left, right);
+            chassis_->set_emergency_stop(false);  
+        }
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 }
+
     
 
 public:
@@ -51,24 +49,10 @@ public:
     Safety operator=(const Safety&) = delete;
 
     
-    void save_waiting(){
-        // if(ultraSonicFront_->check_min_distant_cm(20.)&& ultraSonicBack_->check_min_distant_cm(20.))
-        // {
-        //     chassis_->turn_left_full(1);
-        //     chassis_->forward(2);
-        //     chassis_->turn_right_full(1);
-        // }
-        if(ultraSonicFront_->check_min_distant_cm(20.0)) chassis_->back(1);
-        if(ir_sensorLeft_->is_object_detected()) chassis_-> turn_right_full(1);
-        if(ir_sensorRight_->is_object_detected()) chassis_->turn_left_full(1);
-        // if(ultraSonicBack_->check_min_distant_cm(20.)) chassis_->forward(1);
+    void save(bool front, bool left, bool right) {
+    if (front) chassis_->back(1);
+    if (left)  chassis_->turn_left_full(1);
+    if (right) chassis_->turn_right_full(1);
     }
-
-   
-
-    
-
-
-
 };
 
