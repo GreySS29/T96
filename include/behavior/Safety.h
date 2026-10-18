@@ -23,8 +23,10 @@ private:
 
             if(obstacle) {
                 chassis_->set_emergency_stop(true);
+                std::cout << "obsctacle\n";
                 break;
             }
+            else chassis_->set_emergency_stop(false);
         
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
