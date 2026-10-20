@@ -5,6 +5,7 @@
 #include "drivers/MotorDriver_25mm.h"
 #include "drivers/HC_SR04.h"
 #include "drivers/Ir_sensor.h"
+#include "scenarios/StraightDriving.h"
 #include <utility>
 
 class Tank
@@ -16,6 +17,7 @@ private:
     std::unique_ptr<ISensor> ir_sensorLeft_;
     std::unique_ptr<Safety> safety_;
     std::unique_ptr<KeyboardControl> kControl_;
+    std::unique_ptr<StraightDriving> stDr_;
 
 public:
     Tank():
@@ -27,7 +29,8 @@ public:
     ir_sensorRight_(std::make_unique<Ir_sensor>(22)),
     ir_sensorLeft_(std::make_unique<Ir_sensor>(25)),
     safety_(std::make_unique<Safety>(base_,ultraSonicFront_,ir_sensorRight_,ir_sensorLeft_)),
-    kControl_(std::make_unique<KeyboardControl>(base_))
+    kControl_(std::make_unique<KeyboardControl>(base_)),
+    stDr_(std::make_unique<StraightDriving>(base_,ultraSonicFront_))
     {}
 
     Tank(std::unique_ptr<Chassis> base, std::unique_ptr<ISensor> front)     //for test
@@ -35,6 +38,10 @@ public:
 
     void get_control_on_keyboard() {
         kControl_->take_control();
+    }
+
+    void go_straight(std::chrono::seconds second){
+        stDr_->active(second);
     }
 
     void stop(){base_->stop();};

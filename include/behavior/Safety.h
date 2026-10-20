@@ -17,7 +17,7 @@ private:
 
    void obstacle_watchdog(std::stop_token stop_token) {
     while (!stop_token.stop_requested()) {
-        const bool front = ultraSonicFront_->check_min_distant_cm(20.0);
+        const bool front = ultraSonicFront_->check_min_distant_cm(15.0);
         const bool left  = ir_sensorLeft_->is_object_detected();
         const bool right = ir_sensorRight_->is_object_detected();
 

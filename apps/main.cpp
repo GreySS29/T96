@@ -16,6 +16,14 @@ int main()
        while (std::cin >> kcontrol)
        {
         if (kcontrol == 'k') tank.get_control_on_keyboard();
+        else if (kcontrol =='s') {
+            std::cout << "input second >>" << std::endl;
+            int second{};
+            std::cin >> second; 
+            std::chrono::seconds seconds{second};
+            
+            tank.go_straight(seconds);
+        }
        }
        tank.stop();
        
