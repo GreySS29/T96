@@ -2,12 +2,14 @@
 #include <iostream>
 
 int main() {
-    cv::VideoCapture cap(0); 
+     cv::VideoCapture cap(0, cv::CAP_V4L2);
 
     if (!cap.isOpened()) {
         std::cerr << "Camera not opened\n";
         return 1;
     }
+
+	cap.set(cv::CAP_PROG_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));
 
     cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
