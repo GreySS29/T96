@@ -1,0 +1,38 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+int main() {
+    cv::VideoCapture cap(0); 
+
+    if (!cap.isOpened()) {
+        std::cerr << "Camera not opened\n";
+        return 1;
+    }
+
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    cap.set(cv::CAP_PROP_FPS, 30);
+
+
+    std::cout << "Width:  " << cap.get(cv::CAP_PROP_FRAME_WIDTH)  << '\n';
+    std::cout << "Height: " << cap.get(cv::CAP_PROP_FRAME_HEIGHT) << '\n';
+    std::cout << "FPS:    " << cap.get(cv::CAP_PROP_FPS)        << '\n';
+
+    cv::Mat frame;
+    while (true) {
+        if (!cap.read(frame) || frame.empty()) {
+            std::cerr << "Failed to read frame\n";
+            break;
+        }
+
+        cv::imshow("Camera", frame);
+
+        if (cv::waitKey(1) == 'q') {
+            break;
+        }
+    }
+
+    cap.release();
+    cv::destroyAllWindows();
+    return 0;
+}
