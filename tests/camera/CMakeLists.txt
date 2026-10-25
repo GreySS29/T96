@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenCV REQUIRED)
 
-add_executable(camera_test test_vision_1.cpp)
+add_executable(camera_test test_vision_3bin.cpp)
 
 target_include_directories(camera_test PRIVATE ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(camera_test PRIVATE ${OpenCV_LIBS})
