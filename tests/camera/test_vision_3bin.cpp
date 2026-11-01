@@ -40,7 +40,7 @@ int main() {
 	
 
         cv::imshow("Gray", cam);
-	cv::imshow("Vision", binary);
+	    cv::imshow("Vision", binary);
 
 
         if (cv::waitKey(1) == 'q') {
