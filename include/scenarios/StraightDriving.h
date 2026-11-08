@@ -1,23 +1,24 @@
 #include "../behavior/BypassingObstacle.h"
 #include "../hardware/Chassis.h"
-#include "../hardware/ISensor.h"
+#include "../hardware/SensorPanel.h"
 
 #include <memory>
 #include <thread>
 
+//strange class now
 class StraightDriving
 {
 private:
    
     Chassis& base_;
     BypassingObstacle bypObs_;
-    ISensor& frontSens_;
+    SensorPanel& sensPanel_;
 
 public:
-    StraightDriving( std::unique_ptr<Chassis>& base, std::unique_ptr<ISensor>& frontSens  ) :
+    StraightDriving( std::unique_ptr<Chassis>& base, std::unique_ptr<SensorPanel>& sensPanel  ) :
         base_(*base),
         bypObs_(*base),
-        frontSens_(*frontSens)
+        sensPanel_(*sensPanel)
     {};
 
     void active(std::chrono::seconds second)
@@ -26,7 +27,7 @@ public:
 
         while (std::chrono::steady_clock::now() < finish)
         {
-            if (frontSens_.check_min_distant_cm(20))
+            if (sensPanel_.ultraSonicFront_->check_min_distant_cm(20))
             {
                 base_.stop();
                 bypObs_.run();
