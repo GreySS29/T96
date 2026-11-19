@@ -6,8 +6,8 @@
 using gpiod::line::value;
 
 int main() {
-    const unsigned AIN1 = 17, AIN2 = 27, PWMA = 22,
-	BIN1 =23 , BIN2=24, PWMB = 25, STBY = 26;
+    const unsigned AIN2 = 17, AIN1 = 27, PWMA = 22,
+	BIN1 =24 , BIN2=23, PWMB = 25, STBY = 26;
 
     try {
         auto req = gpiod::chip("/dev/gpiochip0")
@@ -34,6 +34,8 @@ int main() {
 	std::cout << "Basck\n";
 	req.set_value(AIN1, value::INACTIVE);
 	req.set_value(AIN2, value::ACTIVE);
+	req.set_value(BIN1, value::INACTIVE);
+	req.set_value(BIN2, value::ACTIVE);
 	
 	std::this_thread::sleep_for(std::chrono::seconds(3));
 

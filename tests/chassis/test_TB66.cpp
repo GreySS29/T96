@@ -7,9 +7,9 @@ using gpiod::line::value;
 using namespace std::chrono;
 
 int main() {
-    const unsigned AIN1 = 17, AIN2 = 27, PWMA = 22, STBY = 26;
-    //const int duty = 90;            // скважность, %
-    //const int period_us = 2000;     // период ШИМ 2 мс (~500 Гц)
+    const unsigned AIN1 = 27, AIN2 = 17, PWMA = 22, STBY = 26;
+    const int duty = 30;            // скважность, %
+    const int period_us = 2000;     // период ШИМ 2 мс (~500 Гц)
 
     auto req = gpiod::chip("/dev/gpiochip0")
         .prepare_request()
@@ -21,18 +21,17 @@ int main() {
                 .set_output_value(value::INACTIVE))
         .do_request();
 
-    req.set_value(STBY, value::ACTIVE);   // включить драйвер
+    req.set_value(STBY, value::ACTIVE);  
 
-    // ---- Вперёд 3 с ----
     std::cout << "Вперёд 50%\n";
     req.set_value(AIN1, value::ACTIVE);
     req.set_value(AIN2, value::INACTIVE);
-    auto end = steady_clock::now() + seconds(10);
+    auto end = steady_clock::now() + seconds(4);
     while (steady_clock::now() < end) {
         req.set_value(PWMA, value::ACTIVE);
-      //  std::this_thread::sleep_for(microseconds(period_us * duty / 100));
-        ///req.set_value(PWMA, value::INACTIVE);
-       // std::this_thread::sleep_for(microseconds(period_us * (100 - duty) / 100));
+        std::this_thread::sleep_for(microseconds(period_us * duty / 100));
+        req.set_value(PWMA, value::INACTIVE);
+      std::this_thread::sleep_for(microseconds(period_us * (100 - duty) / 100));
     }
 
 
