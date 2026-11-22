@@ -21,7 +21,7 @@ private:
 public:
     explicit Ir_sensor(
         gpiod::line::offset sensor_pin,
-        const std::string& chip_path = "/dev/gpiochip0")
+        const std::string& chip_path)
         : sensor_pin_(sensor_pin),
           chip_(chip_path),
           request_(

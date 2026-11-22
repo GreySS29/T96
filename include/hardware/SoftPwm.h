@@ -3,8 +3,10 @@
 #include <thread>
 #include <chrono>
 #include <algorithm>
+#include "IPwm.h"
 
-class SoftPwm : public IPwm {
+class SoftPwm : public IPwm 
+{
 public:
     SoftPwm(gpiod::line::offset pin, const std::string& chip_path, double freq_hz = 200.0) //freq_hz for collector motors
         : pin_(pin),

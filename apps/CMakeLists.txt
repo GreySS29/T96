@@ -17,7 +17,7 @@ add_compile_options(-fdiagnostics-color=always)
 
 add_executable(tank
     main.cpp
-    ../src/drivers/motorDriver_25mm.cpp
+    ../src/drivers/MotorPWM.cpp
     ../src/drivers/HC_SR04.cpp
 )
 

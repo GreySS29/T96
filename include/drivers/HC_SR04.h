@@ -29,7 +29,7 @@ class HC_SR04 final : public ISensor
     public:
         explicit HC_SR04(gpiod::line::offset trig,
                         gpiod::line::offset echo,
-                        const std::string& chip_path = "/dev/gpiochip0")
+                        const std::string& chip_path)
             : trig_(trig), echo_(echo),
             req_(gpiod::chip(chip_path).prepare_request()
                     .set_consumer("hc-sr04")
