@@ -17,11 +17,27 @@ class Chassis {
                 rightMot_->set_state(MotorState::ActiveUp);
         }
 
+        void forward_50_imp() {
+                leftMot_->set_speed(0.5);
+                rightMot_->set_speed(0.5);
+        }
+
         void back_imp () {
                 leftMot_->set_state(MotorState::ActiveBack);
                 rightMot_->set_state(MotorState::ActiveBack);
 
         }
+
+        void back_50_imp() {
+                leftMot_->set_speed(-0.5);
+                rightMot_->set_speed(-0.5);
+        }
+
+        void brake_imp() {
+                leftMot_->brake();
+                rightMot_->brake();
+        }
+
         void turn_left_full_imp () {
                 leftMot_->set_state(MotorState::ActiveBack);
                 rightMot_->set_state(MotorState::ActiveUp);

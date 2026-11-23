@@ -3,11 +3,11 @@
 #include <utility>
 #include <string>
 
-#include "hardware/Chassis.h"
-#include "hardware/SoftPwm.h"
-#include "drivers/MotorPWM.h"
-#include "drivers/HC_SR04.h"
-#include "drivers/Ir_sensor.h"
+#include "../hardware/Chassis.h"
+#include "../hardware/SoftPwm.h"
+#include "../drivers/MotorPWM.h"
+#include "../drivers/HC_SR04.h"
+#include "../drivers/Ir_sensor.h"
 
 
 
@@ -30,7 +30,6 @@ public:
             std::make_unique<MotorPWM>(23,24,pwm_,chip_path_))),
     ultraSonicFront_ (std::make_unique<HC_SR04>(5,6,chip_path_)),
     ir_sensorRight_(std::make_unique<Ir_sensor>(22,chip_path_)),
-    ir_sensorLeft_(std::make_unique<Ir_sensor>(25,chip_path_)),
-    {}
+    ir_sensorLeft_(std::make_unique<Ir_sensor>(25,chip_path_)){}
 };
 

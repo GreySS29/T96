@@ -8,7 +8,7 @@
 class SoftPwm : public IPwm 
 {
 public:
-    SoftPwm(gpiod::line::offset pin, const std::string& chip_path, double freq_hz = 200.0) //freq_hz for collector motors
+    SoftPwm(gpiod::line::offset pin, const std::string& chip_path, double freq_hz = 200.0) 
         : pin_(pin),
           period_(std::chrono::duration_cast<std::chrono::steady_clock::duration>(
                       std::chrono::duration<double>(1.0 / freq_hz))),
@@ -17,7 +17,7 @@ public:
               .add_line_settings(pin_,
                   gpiod::line_settings()
                       .set_direction(gpiod::line::direction::OUTPUT)
-                      .set_output_value(gpiod::line::value::INACTIVE))
+                      .set_output_value(gpiod::line::value::ACTIVE)) // changed . didn't check
               .do_request()),
           running_(true),
           thread_([this] { run(); }) {}

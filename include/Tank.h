@@ -18,7 +18,7 @@ private:
 
 public:
     Tank():
-    body_(std::make_unique<PhysicalBody>),
+    body_(std::make_unique<PhysicalBody>()),
     safety_(std::make_unique<Safety>(
         body_->base_,
         body_->ultraSonicFront_,
