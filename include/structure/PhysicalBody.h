@@ -8,6 +8,7 @@
 #include "../drivers/MotorPWM.h"
 #include "../drivers/HC_SR04.h"
 #include "../drivers/Ir_sensor.h"
+#include "../drivers/StandbyPin.h"
 
 
 
@@ -16,6 +17,7 @@ class PhysicalBody
 {
 private:
     const std::string chip_path_ = "/dev/gpiochip0"; //rasp pi 4
+    StandbyPin stby_{26, chip_path_}; 
     SoftPwm pwm_r = SoftPwm(22,chip_path_);
     SoftPwm pwm_l = SoftPwm(25,chip_path_);
     
