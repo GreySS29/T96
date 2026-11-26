@@ -16,7 +16,8 @@ class PhysicalBody
 {
 private:
     const std::string chip_path_ = "/dev/gpiochip0"; //rasp pi 4
-    SoftPwm pwm_ = SoftPwm(25,chip_path_);
+    SoftPwm pwm_r = SoftPwm(22,chip_path_);
+    SoftPwm pwm_l = SoftPwm(25,chip_path_);
     
 public:
     std::unique_ptr<Chassis> base_;
@@ -26,10 +27,10 @@ public:
 
     PhysicalBody() : 
     base_(std::make_unique<Chassis>(
-            std::make_unique<MotorPWM>(17,27,pwm_,chip_path_),
-            std::make_unique<MotorPWM>(23,24,pwm_,chip_path_))),
-    ultraSonicFront_ (std::make_unique<HC_SR04>(5,6,chip_path_)),
-    ir_sensorRight_(std::make_unique<Ir_sensor>(22,chip_path_)),
-    ir_sensorLeft_(std::make_unique<Ir_sensor>(25,chip_path_)){}
+            std::make_unique<MotorPWM>(17,27,pwm_r,chip_path_),
+            std::make_unique<MotorPWM>(23,24,pwm_l,chip_path_))),
+    ultraSonicFront_ (std::make_unique<HC_SR04>(5,6,chip_path_)), //trig, echo
+    ir_sensorRight_(std::make_unique<Ir_sensor>(8,chip_path_)),
+    ir_sensorLeft_(std::make_unique<Ir_sensor>(7,chip_path_)){}
 };
 
