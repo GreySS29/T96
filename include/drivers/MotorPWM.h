@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../hardware/IMotor.h"
+#include "../hardware/IMotorPWM.h"
 #include "../hardware/IPwm.h"
 #include <gpiod.hpp>
 #include <string>
 
-class MotorPWM final : public IMotor
+class MotorPWM final : public IMotorPWM
 {
 public:
     MotorPWM(gpiod::line::offset AIN1,

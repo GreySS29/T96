@@ -12,7 +12,6 @@ public:
                      const std::string& chip_path = "/dev/gpiochip0");
     ~MotorDriverL298N() override;
 
-    void set_speed(float s) = 0;
     void       set_state(MotorState new_state) override;
     MotorState get_state() const noexcept override { return state_; };
 

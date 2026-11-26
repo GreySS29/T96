@@ -1,0 +1,1 @@
+enum class MotorState {ActiveUp, Inactive, ActiveBack, SpeedMode, Brake};
